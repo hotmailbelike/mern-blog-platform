@@ -1,0 +1,58 @@
+.card {
+	align-items: center;
+}
+
+.hover-message {
+	text-align: center;
+}
+
+.container-body {
+	margin-bottom: 3.5rem !important;
+}
+
+.card__image {
+	padding-top: 1rem;
+	width: 80%;
+	height: auto;
+}
+
+.card__image:hover {
+	cursor: pointer;
+	opacity: 0.85;
+}
+
+.card__title--large {
+	font-family: serif;
+	font-size: 2rem !important;
+}
+
+.card__title--middle {
+	// width: 85%;
+	margin: auto;
+	text-align: center !important;
+}
+
+.card__title--middle:hover {
+	color: rgba(0, 1, 78, 0.897);
+	cursor: pointer;
+}
+
+.card__imgOverlay {
+	height: 1px;
+	padding: 0 !important;
+}
+
+.card__imgOverlay button {
+	// margin-top: 1rem;
+	float: right;
+	// margin-left: 0.7rem;
+	// margin-left: 0.7rem;
+	margin: 1rem 0.4rem 0 0.4rem;
+	position: relative;
+	float: right;
+}
+
+.link--no-decoration {
+	color: inherit !important;
+	text-decoration: inherit !important;
+}
