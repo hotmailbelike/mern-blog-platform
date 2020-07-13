@@ -10,7 +10,7 @@ import DeleteBlogModal from './DeleteBlogModal';
 
 import BlogContext from '../../context/blog/blogContext';
 
-const BlogItem = ({ blog }) => {
+const BlogItem = ({ blog, userBlog }) => {
 	const blogContext = useContext(BlogContext);
 	const { deleteBlog } = blogContext;
 
@@ -39,7 +39,6 @@ const BlogItem = ({ blog }) => {
 							<img
 								id='card-img'
 								className='card__image'
-								fluid
 								src={blog.imgURL}
 								alt={blog.title}
 							></img>
@@ -54,7 +53,7 @@ const BlogItem = ({ blog }) => {
 								{' '}
 								<Link to={'/blogs/edit/' + blog._id}>
 									<Button size='sm' variant='outline-primary'>
-										<i class='fas fa-pen'></i>
+										<i className='fas fa-pen'></i>
 									</Button>
 								</Link>
 								<Button
@@ -64,7 +63,7 @@ const BlogItem = ({ blog }) => {
 									size='sm'
 									variant='outline-warning'
 								>
-									<i style={{ color: 'red' }} class='fas fa-trash-alt'></i>
+									<i style={{ color: 'red' }} className='fas fa-trash-alt'></i>
 								</Button>
 							</Card.ImgOverlay>
 						</CSSTransition>
@@ -85,7 +84,7 @@ const BlogItem = ({ blog }) => {
 						</div>
 					</Card.Title>
 					<Card.Subtitle className='mb-1 mt-1 text-muted'>
-						Posted by: {blog.createdBy}
+						Posted by: {blog.showName || userBlog ? blog.createdBy : 'Anonymous'}
 					</Card.Subtitle>
 				</Card.Body>
 			</Card>

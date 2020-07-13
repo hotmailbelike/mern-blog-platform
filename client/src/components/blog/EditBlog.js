@@ -16,15 +16,15 @@ const EditBlog = ({ match }) => {
 	const [blog, setBlog] = useState({
 		title: '',
 		imgURL: '',
-		type: '',
+		isPublic: '',
 		showName: '',
 		body: '',
 	});
 
-	const { title, imgURL, type, body, showName } = blog;
+	const { title, imgURL, isPublic, body, showName } = blog;
 
 	const clearForm = () => {
-		setBlog({ title: '', imgURL: '', type: 'public', showName: 'yes', body: '' });
+		setBlog({ title: '', imgURL: '', isPublic: 'true', showName: 'true', body: '' });
 	};
 
 	const onChange = (event) => {
@@ -37,7 +37,8 @@ const EditBlog = ({ match }) => {
 			blog.imgURL =
 				'https://www.pixelstalk.net/wp-content/uploads/2016/10/Image-of-Blank.jpeg';
 
-		if (type === `private`) blog.showName = `no`;
+		blog.isPublic === 'true' ? (blog.isPublic = true) : (blog.isPublic = false);
+		blog.showName === 'true' ? (blog.showName = true) : (blog.showName = false);
 
 		updateBlog(blog);
 
@@ -47,7 +48,14 @@ const EditBlog = ({ match }) => {
 
 	useEffect(() => {
 		readSingleBlog(blogId);
-		setBlog(singleBlog);
+
+		singleBlog &&
+			setBlog({
+				...singleBlog,
+				isPublic: isPublic.toString(),
+				showName: showName.toString(),
+			});
+		console.log(blog);
 	}, [singleBlog]);
 
 	return (
@@ -82,38 +90,38 @@ const EditBlog = ({ match }) => {
 					<br />
 					<input
 						type='radio'
-						name='type'
-						value='public'
-						checked={type === 'public'}
+						name='isPublic'
+						value='true'
+						checked={isPublic === 'true'}
 						onChange={onChange}
 					/>{' '}
 					Public{' '}
 					<input
 						type='radio'
-						name='type'
-						value='private'
-						checked={type === 'private'}
+						name='isPublic'
+						value='false'
+						checked={isPublic === 'false'}
 						onChange={onChange}
 					/>{' '}
 					Private
 				</Form.Group>
-				{type === 'public' && (
+				{isPublic === 'true' && (
 					<Form.Group>
 						<Form.Label>Show your Name when posting this blog? </Form.Label>
 						<br />
 						<input
 							type='radio'
 							name='showName'
-							value='yes'
-							checked={showName === 'yes'}
+							value='true'
+							checked={showName === 'true'}
 							onChange={onChange}
 						/>{' '}
 						Yes{' '}
 						<input
 							type='radio'
 							name='showName'
-							value='no'
-							checked={showName === 'no'}
+							value='false'
+							checked={showName === 'false'}
 							onChange={onChange}
 						/>{' '}
 						No

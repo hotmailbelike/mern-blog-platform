@@ -17,36 +17,34 @@ const names = [
 
 const BlogState = (props) => {
 	const initialState = {
-		userBlogs: [
+		blogs: [
 			{
 				_id: '8547',
 				title: 'Classic Cars Redesigned',
 				imgURL:
 					'https://images.unsplash.com/photo-1529426301869-82f4d98d3d81?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80',
-				type: 'private',
-				showName: 'no',
+				isPublic: false,
+				showName: false,
 				body: temp,
-				createdBy: 'The Jackal',
+				createdBy: 'Randa',
 			},
 			{
 				_id: '4521',
 				title: 'Squirrels are Smart!',
 				imgURL:
 					'https://images.pexels.com/photos/47547/squirrel-animal-cute-rodents-47547.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260',
-				type: 'public',
-				showName: 'yes',
+				isPublic: true,
+				showName: false,
 				body: temp,
 				createdBy: 'The Jackal',
 			},
-		],
-		publicBlogs: [
 			{
 				_id: '1',
 				title: 'Christmas all Around the World',
 				imgURL:
 					'https://images.unsplash.com/photo-1514064982421-df8563d62bbf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1949&q=80',
-				type: 'public',
-				showName: 'yes',
+				isPublic: true,
+				showName: true,
 				body: temp,
 				createdBy: 'The Jackal',
 			},
@@ -55,22 +53,13 @@ const BlogState = (props) => {
 				title: 'The White Wolf and its Nature',
 				imgURL:
 					'https://images.unsplash.com/photo-1580298689915-73cb3035ae1f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1951&q=80',
-				type: 'public',
-				showName: 'no',
+				isPublic: true,
+				showName: false,
 				body: temp,
-				createdBy: 'Anonymous',
-			},
-			{
-				_id: '4521',
-				title: 'Squirrels are Smart!',
-				imgURL:
-					'https://images.pexels.com/photos/47547/squirrel-animal-cute-rodents-47547.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260',
-				type: 'public',
-				showName: 'yes',
-				body: temp,
-				createdBy: 'The Jackal',
+				createdBy: 'Brigid',
 			},
 		],
+
 		singleBlog: {},
 	};
 	const [state, dispatch] = useReducer(blogReducer, initialState);
@@ -88,19 +77,8 @@ const BlogState = (props) => {
 	const addBlog = (blog) => {
 		blog._id = (Math.floor(Math.random() * 1000) + 1).toString();
 		blog.createdBy = names[Math.floor(Math.random() * names.length)];
-	};
-
-	//Add Private Blog
-	const addPrivateBlog = (blog) => {
-		addBlog(blog);
-		console.log(blog);
-		dispatch({ type: `ADD_PRIVATE_BLOG`, payload: blog });
-	};
-
-	//Add Public Blog
-	const addPublicBlog = (blog) => {
-		addBlog(blog);
-		dispatch({ type: `ADD_PUBLIC_BLOG`, payload: blog });
+		console.log('addBlog -> blog', blog);
+		dispatch({ type: `ADD_BLOG`, payload: blog });
 	};
 
 	//Delete Blog
@@ -116,11 +94,9 @@ const BlogState = (props) => {
 	return (
 		<BlogContext.Provider
 			value={{
-				userBlogs: state.userBlogs,
-				publicBlogs: state.publicBlogs,
+				blogs: state.blogs,
 				singleBlog: state.singleBlog,
-				addPrivateBlog,
-				addPublicBlog,
+				addBlog,
 				readSingleBlog,
 				deleteBlog,
 				updateBlog,

@@ -7,9 +7,11 @@ import BlogItem from './BlogItem';
 
 const MyBlogs = () => {
 	const blogContext = useContext(BlogContext);
-	let { userBlogs } = blogContext;
+	let { blogs } = blogContext;
 
-	if (!userBlogs || userBlogs.length === 0) {
+	const myBlogs = blogs.filter((blog) => blog.createdBy === `The Jackal`); //will be changed to whichever user is logged in
+
+	if (!myBlogs || myBlogs.length === 0) {
 		return (
 			<Container>
 				<h2>
@@ -22,8 +24,8 @@ const MyBlogs = () => {
 
 	return (
 		<>
-			{userBlogs.map((blog) => (
-				<BlogItem key={blog._id} blog={blog}></BlogItem>
+			{myBlogs.map((blog) => (
+				<BlogItem key={blog._id} userBlog={true} blog={blog}></BlogItem>
 			))}
 		</>
 	);

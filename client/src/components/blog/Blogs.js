@@ -5,13 +5,15 @@ import BlogItem from './BlogItem';
 
 const Blogs = () => {
 	const blogContext = useContext(BlogContext);
-	const { publicBlogs } = blogContext;
+	const { blogs } = blogContext;
 
 	return (
 		<>
-			{publicBlogs.map((blog) => (
-				<BlogItem key={blog._id} blog={blog}></BlogItem>
-			))}
+			{blogs
+				.filter((blog) => blog.isPublic)
+				.map((blog) => (
+					<BlogItem key={blog._id} userBlog={false} blog={blog}></BlogItem>
+				))}
 		</>
 	);
 };
