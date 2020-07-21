@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
@@ -34,13 +34,15 @@ const SingleBlog = ({ match }) => {
 						alt={singleBlog.title}
 						className='img content--center'
 						fluid
-						src={singleBlog.imgURL}
+						src={singleBlog.imgFile}
 					/>
 				</div>
 				<div className='button--position'>
-					<Button className='mr-2' size='sm' variant='outline-primary'>
-						<i class='fas fa-pen'></i>
-					</Button>
+					<Link to={'/blogs/edit/' + singleBlog._id}>
+						<Button className='mr-2' size='sm' variant='outline-primary'>
+							<i class='fas fa-pen'></i>
+						</Button>
+					</Link>
 					<Button
 						onClick={() => {
 							setShowModal(true);

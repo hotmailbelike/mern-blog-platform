@@ -16,15 +16,27 @@ const PostBlog = () => {
 	const [blog, setBlog] = useState({
 		title: '',
 		imgURL: '',
+		imgFile: null,
 		isPublic: 'true',
 		showName: 'true',
 		body: '',
 	});
 
-	const { title, imgURL, isPublic, body, showName } = blog;
+	const { title, imgURL, imgFile, isPublic, body, showName } = blog;
 
 	const clearForm = () => {
-		setBlog({ title: '', imgURL: '', isPublic: 'true', showName: 'true', body: '' });
+		setBlog({
+			title: '',
+			imgURL: '',
+			imgFile: null,
+			isPublic: 'true',
+			showName: 'true',
+			body: '',
+		});
+	};
+
+	const handleImgUpload = (event) => {
+		setBlog({ ...blog, ['imgFile']: URL.createObjectURL(event.target.files[0]) });
 	};
 
 	const onChange = (event) => {
@@ -33,12 +45,13 @@ const PostBlog = () => {
 
 	const onSubmit = (e) => {
 		e.preventDefault();
-		if (!blog.imgURL)
-			blog.imgURL =
-				'https://www.pixelstalk.net/wp-content/uploads/2016/10/Image-of-Blank.jpeg';
+		// if (!blog.imgURL)
+		// 	blog.imgURL =
+		// 		'https://www.pixelstalk.net/wp-content/uploads/2016/10/Image-of-Blank.jpeg';
 
 		blog.isPublic === 'true' ? (blog.isPublic = true) : (blog.isPublic = false);
 		blog.showName === 'true' ? (blog.showName = true) : (blog.showName = false);
+		delete blog.imgURL;
 
 		addBlog(blog);
 		clearForm();
@@ -64,7 +77,7 @@ const PostBlog = () => {
 						onChange={onChange}
 					/>
 				</Form.Group>
-				<Form.Group>
+				{/* <Form.Group>
 					<Form.Label>Image URL</Form.Label>
 					<Form.Control
 						type='url'
@@ -73,7 +86,21 @@ const PostBlog = () => {
 						value={imgURL}
 						onChange={onChange}
 					/>
+				</Form.Group> */}
+				<Form.Group>
+					<Form.File label='Choose Blog Picture' onChange={handleImgUpload} />
 				</Form.Group>
+				<div className='img-preview--middle'>
+					<img
+						className='img-preview'
+						src={
+							imgFile
+								? imgFile
+								: 'https://www.pixelstalk.net/wp-content/uploads/2016/10/Image-of-Blank.jpeg'
+						}
+						alt=''
+					/>
+				</div>
 				<Form.Group>
 					<Form.Label>Post blog as: </Form.Label>
 					<br />

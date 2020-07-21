@@ -21,7 +21,7 @@ const BlogState = (props) => {
 			{
 				_id: '8547',
 				title: 'Classic Cars Redesigned',
-				imgURL:
+				imgFile:
 					'https://images.unsplash.com/photo-1529426301869-82f4d98d3d81?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80',
 				isPublic: false,
 				showName: false,
@@ -31,7 +31,7 @@ const BlogState = (props) => {
 			{
 				_id: '4521',
 				title: 'Squirrels are Smart!',
-				imgURL:
+				imgFile:
 					'https://images.pexels.com/photos/47547/squirrel-animal-cute-rodents-47547.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260',
 				isPublic: true,
 				showName: false,
@@ -41,7 +41,7 @@ const BlogState = (props) => {
 			{
 				_id: '1',
 				title: 'Christmas all Around the World',
-				imgURL:
+				imgFile:
 					'https://images.unsplash.com/photo-1514064982421-df8563d62bbf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1949&q=80',
 				isPublic: true,
 				showName: true,
@@ -51,7 +51,7 @@ const BlogState = (props) => {
 			{
 				_id: '2',
 				title: 'The White Wolf and its Nature',
-				imgURL:
+				imgFile:
 					'https://images.unsplash.com/photo-1580298689915-73cb3035ae1f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1951&q=80',
 				isPublic: true,
 				showName: false,

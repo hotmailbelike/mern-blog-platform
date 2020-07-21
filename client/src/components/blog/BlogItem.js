@@ -39,7 +39,7 @@ const BlogItem = ({ blog, userBlog }) => {
 							<img
 								id='card-img'
 								className='card__image'
-								src={blog.imgURL}
+								src={blog.imgFile}
 								alt={blog.title}
 							></img>
 						</a>
