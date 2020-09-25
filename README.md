@@ -1,4 +1,4 @@
 # mern-blog-platform
 bloggin platoform
 
-[Live Demo](omar-mern-blog.netlify.app)
+[Live Demo](https://omar-mern-blog.netlify.app/)
