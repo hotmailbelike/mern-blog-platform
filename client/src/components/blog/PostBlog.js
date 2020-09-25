@@ -7,16 +7,19 @@ import Button from 'react-bootstrap/Button';
 
 import BlogContext from '../../context/blog/blogContext';
 
-const PostBlog = () => {
+const PostBlog = ({ edit, currentBlog }) => {
 	const history = useHistory();
 	const blogContext = useContext(BlogContext);
 
-	const { addBlog } = blogContext;
+	const { addBlog, updateBlog } = blogContext;
+
+	const defaultPicture =
+		'https://www.pixelstalk.net/wp-content/uploads/2016/10/Image-of-Blank.jpeg';
 
 	const [blog, setBlog] = useState({
 		title: '',
 		imgURL: '',
-		imgFile: null,
+		imgFile: defaultPicture,
 		isPublic: 'true',
 		showName: 'true',
 		body: '',
@@ -28,7 +31,7 @@ const PostBlog = () => {
 		setBlog({
 			title: '',
 			imgURL: '',
-			imgFile: null,
+			imgFile: defaultPicture,
 			isPublic: 'true',
 			showName: 'true',
 			body: '',
@@ -37,6 +40,10 @@ const PostBlog = () => {
 
 	const handleImgUpload = (event) => {
 		setBlog({ ...blog, ['imgFile']: URL.createObjectURL(event.target.files[0]) });
+	};
+
+	const removePicture = () => {
+		setBlog({ ...blog, ['imgFile']: defaultPicture });
 	};
 
 	const onChange = (event) => {
@@ -49,16 +56,24 @@ const PostBlog = () => {
 		// 	blog.imgURL =
 		// 		'https://www.pixelstalk.net/wp-content/uploads/2016/10/Image-of-Blank.jpeg';
 
-		blog.isPublic === 'true' ? (blog.isPublic = true) : (blog.isPublic = false);
-		blog.showName === 'true' ? (blog.showName = true) : (blog.showName = false);
+		blog.isPublic === 'true' && typeof (blog.isPublic === 'string')
+			? (blog.isPublic = true)
+			: (blog.isPublic = false);
+		blog.showName === 'true' && typeof blog.showName === 'string'
+			? (blog.showName = true)
+			: (blog.showName = false);
 		delete blog.imgURL;
 
-		addBlog(blog);
+		edit ? updateBlog(blog) : addBlog(blog);
 		clearForm();
 		blog.isPublic ? history.push('/') : history.push('/blogs/MyBlogs');
 	};
 
-	useEffect(() => {}, [blogContext]);
+	useEffect(() => {
+		if (edit) {
+			setBlog(currentBlog);
+		}
+	}, [currentBlog]);
 
 	return (
 		<Container>
@@ -75,6 +90,7 @@ const PostBlog = () => {
 						autoComplete='false'
 						value={title}
 						onChange={onChange}
+						maxLength={100}
 					/>
 				</Form.Group>
 				{/* <Form.Group>
@@ -90,17 +106,15 @@ const PostBlog = () => {
 				<Form.Group>
 					<Form.File label='Choose Blog Picture' onChange={handleImgUpload} />
 				</Form.Group>
+				{imgFile !== defaultPicture && (
+					<a id={imgFile !== defaultPicture && 'remove-picture'} onClick={removePicture}>
+						<i class='fa fa-times' aria-hidden='true'></i> Remove Picture
+					</a>
+				)}
 				<div className='img-preview--middle'>
-					<img
-						className='img-preview'
-						src={
-							imgFile
-								? imgFile
-								: 'https://www.pixelstalk.net/wp-content/uploads/2016/10/Image-of-Blank.jpeg'
-						}
-						alt=''
-					/>
+					<img className='img-preview' src={imgFile} alt='defaultPicture' />
 				</div>
+
 				<Form.Group>
 					<Form.Label>Post blog as: </Form.Label>
 					<br />
@@ -158,7 +172,7 @@ const PostBlog = () => {
 				</Form.Group>
 
 				<Button block className='button' size='lg' variant='success' type='submit'>
-					Post your blog!
+					{edit ? 'Update Blog' : 'Post your blog!'}
 				</Button>
 			</Form>
 			<br />

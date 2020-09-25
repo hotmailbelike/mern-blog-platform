@@ -88,7 +88,7 @@ const BlogState = (props) => {
 
 	//Update Blog
 	const updateBlog = (blog) => {
-		dispatch({ type: `Update_Blog`, payload: blog });
+		dispatch({ type: `UPDATE_BLOG`, payload: blog });
 	};
 
 	return (

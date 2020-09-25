@@ -13,7 +13,7 @@ export default (state, action) => {
 				...state,
 				blogs: state.blogs.filter((blog) => blog._id !== action.payload),
 			};
-		case `Update_Blog`:
+		case `UPDATE_BLOG`:
 			return {
 				...state,
 				blogs: state.blogs.map((blog) =>

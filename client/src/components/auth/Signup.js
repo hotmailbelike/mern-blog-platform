@@ -20,6 +20,10 @@ const Signup = () => {
 					<Form.Label>Password</Form.Label>
 					<Form.Control type='password' placeholder='Password' />
 				</Form.Group>
+				<Form.Group>
+					<Form.Label>Re-enter Password</Form.Label>
+					<Form.Control type='password' placeholder='Re-enter Password' />
+				</Form.Group>
 
 				<Button variant='primary' type='submit'>
 					Sign Up!
